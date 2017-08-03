@@ -1,0 +1,30 @@
+.row{
+	margin-bottom: 15px;
+}
+
+.imagen_cont{
+	width: auto;
+	height: 200px;
+}
+
+.imagen{
+	width: 200px;
+	height: auto;
+}
+
+label{
+	padding: 5px;
+	width: 80%;
+}
+
+label p{
+	margin-top: 10px;
+}
+
+input[type=radio]{
+	display: none;
+}
+
+input[type=radio]:checked+label{
+	border: 2px solid #000;
+}
