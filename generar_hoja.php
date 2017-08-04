@@ -83,51 +83,93 @@ function generar_header($pdf, $tipo, $formato){
 		case 1:
 			switch($formato){
 				case 1:
-					//Lineas horizontales
-					$pdf->Line(16, 17, 189, 17);
-					$pdf->Line(16, 24.5, 189, 24.5);
-					$pdf->Line(16, 32, 189, 32);
+					//Lineas horizontales - Parte grande
+					$pdf->Line(30, 12, 144.2, 12);
+					$pdf->Line(30, 19.5, 144.2, 19.5);
+					$pdf->Line(30, 27, 144.2, 27);
 					//Lineas verticales
-					$pdf->Line(16, 17, 16, 32);
-					$pdf->Line(189, 17, 189, 32);
+					$pdf->Line(30, 12, 30, 27);
+					$pdf->Line(144.2, 12, 144.2, 27);
+
+					//Lineas horizontales
+					$pdf->Line(148.2, 12, 207, 12);
+					$pdf->Line(148.2, 19.5, 207, 19.5);
+					$pdf->Line(148.2, 27, 207, 27);
+					//Lineas verticales
+					$pdf->Line(148.2, 12, 148.2, 27);
+					$pdf->Line(207, 12, 207, 27);
 					break;
 
 				case 2:
-					//Lineas horizontales
-					$pdf->Line(16, 17, 189, 17);
-					$pdf->Line(16, 24.5, 189, 24.5);
-					$pdf->Line(16, 32, 189, 32);
+					//Lineas horizontales - Parte Grande
+					$pdf->Line(30, 12, 147, 12);
+					$pdf->Line(30, 19.5, 147, 19.5);
+					$pdf->Line(30, 27, 147, 27);
 					//Lineas verticales
-					$pdf->Line(16, 17, 16, 32);
-					$pdf->Line(189, 17, 189, 32);
+					$pdf->Line(30, 12, 30, 27);
+					$pdf->Line(147, 12, 147, 27);
+
+					//Lineas horizontales
+					$pdf->Line(151, 12, 207, 12);
+					$pdf->Line(151, 19.5, 207, 19.5);
+					$pdf->Line(151, 27, 207, 27);
+					//Lineas verticales
+					$pdf->Line(151, 12, 151, 27);
+					$pdf->Line(207, 12, 207, 27);
 					break;
 
 				case 3:
-					//Lineas horizontales
-					$pdf->Line(16, 12, 191, 12);
-					$pdf->Line(16, 22, 191, 22);
+					//Lineas horizontales - Parte Grande
+					$pdf->Line(30, 12, 143.5, 12);
+					$pdf->Line(30, 19.5, 143.5, 19.5);
+					$pdf->Line(30, 27, 143.5, 27);
 					//Lineas verticales
-					$pdf->Line(16, 12, 16, 22);
-					$pdf->Line(191, 12, 191, 22);
+					$pdf->Line(30, 12, 30, 27);
+					$pdf->Line(143.5, 12, 143.5, 27);
+
+					//Lineas horizontales
+					$pdf->Line(147.5, 12, 205, 12);
+					$pdf->Line(147.5, 19.5, 205, 19.5);
+					$pdf->Line(147.5, 27, 205, 27);
+					//Lineas verticales
+					$pdf->Line(147.5, 12, 147.5, 27);
+					$pdf->Line(205, 12, 205, 27);
 					break;
 
 				case 4:
-					//Lineas horizontales
-					$pdf->Line(16, 12, 191, 12);
-					$pdf->Line(16, 22, 191, 22);
+					//Lineas horizontales - Parte Grande
+					$pdf->Line(30, 12, 143.5, 12);
+					$pdf->Line(30, 19.5, 143.5, 19.5);
+					$pdf->Line(30, 27, 143.5, 27);
 					//Lineas verticales
-					$pdf->Line(16, 12, 16, 22);
-					$pdf->Line(191, 12, 191, 22);
+					$pdf->Line(30, 12, 30, 27);
+					$pdf->Line(143.5, 12, 143.5, 27);
+
+					//Lineas horizontales
+					$pdf->Line(147.5, 12, 205, 12);
+					$pdf->Line(147.5, 19.5, 205, 19.5);
+					$pdf->Line(147.5, 27, 205, 27);
+					//Lineas verticales
+					$pdf->Line(147.5, 12, 147.5, 27);
+					$pdf->Line(205, 12, 205, 27);
 					break;
 
 				default:
-					//Lineas horizontales
-					$pdf->Line(16, 17, 189, 17);
-					$pdf->Line(16, 24.5, 189, 24.5);
-					$pdf->Line(16, 32, 189, 32);
+					//Lineas horizontales - Parte grande
+					$pdf->Line(30, 12, 144.2, 12);
+					$pdf->Line(30, 19.5, 144.2, 19.5);
+					$pdf->Line(30, 27, 144.2, 27);
 					//Lineas verticales
-					$pdf->Line(16, 17, 16, 32);
-					$pdf->Line(189, 17, 189, 32);
+					$pdf->Line(30, 12, 30, 27);
+					$pdf->Line(144.2, 12, 144.2, 27);
+
+					//Lineas horizontales
+					$pdf->Line(148.2, 12, 206, 12);
+					$pdf->Line(148.2, 19.5, 206, 19.5);
+					$pdf->Line(148.2, 27, 206, 27);
+					//Lineas verticales
+					$pdf->Line(148.2, 12, 148.2, 27);
+					$pdf->Line(206, 12, 206, 27);
 					break;
 			}
 			break;
@@ -252,51 +294,93 @@ function generar_header_reverso($pdf, $tipo, $formato){
 		case 1:
 			switch($formato){
 				case 1:
-					//Lineas horizontales
-					$pdf->Line(11, 17, 184, 17);
-					$pdf->Line(11, 24.5, 184, 24.5);
-					$pdf->Line(11, 32, 184, 32);
+					//Lineas horizontales - Parte grande
+					$pdf->Line(9, 12, 130.2, 12);
+					$pdf->Line(9, 19.5, 130.2, 19.5);
+					$pdf->Line(9, 27, 130.2, 27);
 					//Lineas verticales
-					$pdf->Line(11, 17, 11, 32);
-					$pdf->Line(184, 17, 184, 32);
+					$pdf->Line(9, 12, 9, 27);
+					$pdf->Line(130.2, 12, 130.2, 27);
+
+					//Lineas horizontales
+					$pdf->Line(134.9, 12, 186, 12);
+					$pdf->Line(134.2, 19.5, 186, 19.5);
+					$pdf->Line(134.2, 27, 186, 27);
+					//Lineas verticales
+					$pdf->Line(134.2, 12, 134.2, 27);
+					$pdf->Line(186, 12, 186, 27);
 					break;
 
 				case 2:
-					//Lineas horizontales
-					$pdf->Line(11, 17, 184, 17);
-					$pdf->Line(11, 24.5, 184, 24.5);
-					$pdf->Line(11, 32, 184, 32);
+					//Lineas horizontales - Parte Grande
+					$pdf->Line(9, 12, 130.2, 12);
+					$pdf->Line(9, 19.5, 130.2, 19.5);
+					$pdf->Line(9, 27, 130.2, 27);
 					//Lineas verticales
-					$pdf->Line(11, 17, 11, 32);
-					$pdf->Line(184, 17, 184, 32);
+					$pdf->Line(9, 12, 9, 27);
+					$pdf->Line(130.2, 12, 130.2, 27);
+
+					//Lineas horizontales
+					$pdf->Line(134.2, 12, 186, 12);
+					$pdf->Line(134.2, 19.5, 186, 19.5);
+					$pdf->Line(134.2, 27, 186, 27);
+					//Lineas verticales
+					$pdf->Line(134.2, 12, 134.2, 27);
+					$pdf->Line(186, 12, 186, 27);
 					break;
 
 				case 3:
-					//Lineas horizontales
-					$pdf->Line(9, 12, 183, 12);
-					$pdf->Line(9, 22, 183, 22);
+					//Lineas horizontales - Parte Grande
+					$pdf->Line(11, 12, 130.2, 12);
+					$pdf->Line(11, 19.5, 130.2, 19.5);
+					$pdf->Line(11, 27, 130.2, 27);
 					//Lineas verticales
-					$pdf->Line(9, 12, 9, 22);
-					$pdf->Line(183, 12, 183, 22);
+					$pdf->Line(11, 12, 11, 27);
+					$pdf->Line(130.2, 12, 130.2, 27);
+
+					//Lineas horizontales
+					$pdf->Line(134.2, 12, 186, 12);
+					$pdf->Line(134.2, 19.5, 186, 19.5);
+					$pdf->Line(134.2, 27, 186, 27);
+					//Lineas verticales
+					$pdf->Line(134.2, 12, 134.2, 27);
+					$pdf->Line(186, 12, 186, 27);
 					break;
 
 				case 4:
-					//Lineas horizontales
-					$pdf->Line(9, 12, 183, 12);
-					$pdf->Line(9, 22, 183, 22);
+					//Lineas horizontales - Parte Grande
+					$pdf->Line(11, 12, 130.2, 12);
+					$pdf->Line(11, 19.5, 130.2, 19.5);
+					$pdf->Line(11, 27, 130.2, 27);
 					//Lineas verticales
-					$pdf->Line(9, 12, 9, 22);
-					$pdf->Line(183, 12, 183, 22);
+					$pdf->Line(11, 12, 11, 27);
+					$pdf->Line(130.2, 12, 130.2, 27);
+
+					//Lineas horizontales
+					$pdf->Line(134.2, 12, 186, 12);
+					$pdf->Line(134.2, 19.5, 186, 19.5);
+					$pdf->Line(134.2, 27, 186, 27);
+					//Lineas verticales
+					$pdf->Line(134.2, 12, 134.2, 27);
+					$pdf->Line(186, 12, 186, 27);
 					break;
 
 				default:
-					//Lineas horizontales
-					$pdf->Line(11, 17, 184, 17);
-					$pdf->Line(11, 24.5, 184, 24.5);
-					$pdf->Line(11, 32, 184, 32);
+					//Lineas horizontales - Parte grande
+					$pdf->Line(10, 12, 130.2, 12);
+					$pdf->Line(10, 19.5, 130.2, 19.5);
+					$pdf->Line(10, 27, 130.2, 27);
 					//Lineas verticales
-					$pdf->Line(11, 17, 11, 32);
-					$pdf->Line(184, 17, 184, 32);
+					$pdf->Line(10, 12, 10, 27);
+					$pdf->Line(130.2, 12, 130.2, 27);
+
+					//Lineas horizontales
+					$pdf->Line(134.2, 12, 186, 12);
+					$pdf->Line(134.2, 19.5, 186, 19.5);
+					$pdf->Line(134.2, 27, 186, 27);
+					//Lineas verticales
+					$pdf->Line(134.2, 12, 134.2, 27);
+					$pdf->Line(186, 12, 186, 27);
 					break;
 			}
 			break;
@@ -414,46 +498,46 @@ function generar_header_reverso($pdf, $tipo, $formato){
 
 //Generar margen de serigrafia del cuerpo del cuaderno
 function generar_body($pdf, $tipo, $formato){
-	$pdf->SetDrawColor(28, 142, 192);
-	$pdf->SetLineWidth(0.1);//SetLineWidth se maneja en cm, no en la medida que establezcas
-	switch ($tipo){
-		//FORMA CARTA
+	switch($tipo){
 		case 1:
 			switch($formato){
 				case 1:
 					//Lineas horizontales
-					$pdf->Line(16, 36, 189, 36);
-					$pdf->Line(16, 254, 189, 254);
+					$pdf->Line(30, 31, 207, 31);
+					$pdf->Line(30, 263, 207, 263);
 					//Lineas verticales
-					$pdf->Line(16, 36, 16, 254);
-					$pdf->Line(189, 36, 189, 254);
+					$pdf->Line(30, 31, 30, 263);
+					$pdf->Line(207, 31, 207, 263);
 					break;
-
+				
 				case 2:
 					//Lineas horizontales
-					$pdf->Line(16, 36, 189, 36);
-					$pdf->Line(16, 254, 189, 254);
+					$pdf->Line(30, 31, 207, 31);
+					$pdf->Line(30, 259, 207, 259);
 					//Lineas verticales
-					$pdf->Line(16, 36, 16, 254);
-					$pdf->Line(189, 36, 189, 254);
+					$pdf->Line(30, 31, 30, 259);
+					$pdf->Line(207, 31, 207, 259);
 					break;
-
+				
 				case 3:
 					//Lineas horizontales
-					$pdf->Line(16, 27, 191, 27);
-					$pdf->Line(16, 247, 191, 247);
+					$pdf->Line(30, 31, 205, 31);
+					$pdf->Line(30, 261, 205, 261);
 					//Lineas verticales
-					$pdf->Line(16, 27, 16, 247);
-					$pdf->Line(191, 27, 191, 247);
+					$pdf->Line(30, 31, 30, 261);
+					$pdf->Line(205, 31, 205, 261);
 					break;
-
+				
 				case 4:
 					//Lineas horizontales
-					$pdf->Line(16, 27, 191, 27);
-					$pdf->Line(16, 247, 191, 247);
+					$pdf->Line(30, 31, 205, 31);
+					$pdf->Line(30, 262, 205, 262);
 					//Lineas verticales
-					$pdf->Line(16, 27, 16, 247);
-					$pdf->Line(191, 27, 191, 247);
+					$pdf->Line(30, 31, 30, 262);
+					$pdf->Line(205, 31, 205, 262);
+					break;
+				
+				default:
 					break;
 			}
 			break;
@@ -585,46 +669,46 @@ function generar_body($pdf, $tipo, $formato){
 
 //Generar reverso del margen de serigrafia del cuerpo del cuaderno
 function generar_body_reverso($pdf, $tipo, $formato){
-	$pdf->SetDrawColor(28, 142, 192);
-	$pdf->SetLineWidth(0.1);//SetLineWidth se maneja en cm, no en la medida que establezcas
-	switch ($tipo){
-		//FORMA CARTA
+	switch($tipo){
 		case 1:
 			switch($formato){
 				case 1:
 					//Lineas horizontales
-					$pdf->Line(11, 36, 184, 36);
-					$pdf->Line(11, 254, 184, 254);
+					$pdf->Line(9, 31, 186, 31);
+					$pdf->Line(9, 263, 186, 263);
 					//Lineas verticales
-					$pdf->Line(11, 36, 11, 254);
-					$pdf->Line(184, 36, 184, 254);
+					$pdf->Line(9, 31, 9, 263);
+					$pdf->Line(186, 31, 186, 263);
 					break;
-
+				
 				case 2:
 					//Lineas horizontales
-					$pdf->Line(11, 36, 184, 36);
-					$pdf->Line(11, 254, 184, 254);
+					$pdf->Line(9, 31, 186, 31);
+					$pdf->Line(9, 259, 186, 259);
 					//Lineas verticales
-					$pdf->Line(11, 36, 11, 254);
-					$pdf->Line(184, 36, 184, 254);
+					$pdf->Line(9, 31, 9, 259);
+					$pdf->Line(186, 31, 186, 259);
 					break;
-
+				
 				case 3:
 					//Lineas horizontales
-					$pdf->Line(9, 27, 183, 27);
-					$pdf->Line(9, 247, 183, 247);
+					$pdf->Line(11, 31, 186, 31);
+					$pdf->Line(11, 261, 186, 261);
 					//Lineas verticales
-					$pdf->Line(9, 27, 9, 247);
-					$pdf->Line(183, 27, 183, 247);
+					$pdf->Line(11, 31, 11, 261);
+					$pdf->Line(186, 31, 186, 261);
 					break;
-
+				
 				case 4:
 					//Lineas horizontales
-					$pdf->Line(9, 27, 183, 27);
-					$pdf->Line(9, 247, 183, 247);
+					$pdf->Line(11, 31, 186, 31);
+					$pdf->Line(11, 262, 186, 262);
 					//Lineas verticales
-					$pdf->Line(9, 27, 9, 247);
-					$pdf->Line(183, 27, 183, 247);
+					$pdf->Line(11, 31, 11, 262);
+					$pdf->Line(186, 31, 186, 262);
+					break;
+				
+				default:
 					break;
 			}
 			break;
@@ -765,38 +849,41 @@ function generar_formato($pdf, $tipo, $formato){
 			switch($formato){
 				case 1:
 					//Lineas horizontales
-					for($i = 1; $i < 28; $i++){
-						$pdf->Line(16, 36+(8*$i), 189, 36+(8*$i));
+					for($i = 1; $i < 29; $i++){
+						$pdf->Line(30, 31+(8*$i), 207, 31+(8*$i));
 					}
 					break;
 
 				case 2:
 					//Lineas horizontales
+					for($i = 1; $i < 20; $i++){
+						$pdf->Line(30, 31+(12*$i)-4, 207, 31+(12*$i)-4);
+					}
+
 					for($i = 1; $i < 19; $i++){
-						$pdf->Line(16, 36+(12*$i), 189, 36+(12*$i));
-						$pdf->Line(16, 36+(12*$i)-4, 189, 36+(12*$i)-4);
+						$pdf->Line(30, 31+(12*$i), 207, 31+(12*$i));
 					}
 					break;
 
 				case 3:
 					//Lineas horizontales
-					for($i = 1; $i < 44; $i++){
-						$pdf->Line(16, 27+(5*$i), 191, 27+(5*$i));
+					for($i = 1; $i < 46; $i++){
+						$pdf->Line(30, 31+(5*$i), 205, 31+(5*$i));
 					}
 					//Lineas verticales
-					for($i = 0; $i < 34; $i++){
-						$pdf->Line(22+(5*$i), 27, 22+(5*$i), 247);
+					for($i = 1; $i < 35; $i++){
+						$pdf->Line(30+(5*$i), 31, 30+(5*$i), 261);
 					}
 					break;
 
 				case 4:
 					//Lineas horizontales
-					for($i = 1; $i < 32; $i++){
-						$pdf->Line(16, 27+(7*$i), 191, 27+(7*$i));
+					for($i = 1; $i < 33; $i++){
+						$pdf->Line(30, 31+(7*$i), 205, 31+(7*$i));
 					}
 					//Lineas verticales
-					for($i = 0; $i < 26; $i++){
-						$pdf->Line(16+(7*$i), 27, 16+(7*$i), 247);
+					for($i = 1; $i < 25; $i++){
+						$pdf->Line(30+(7*$i), 31, 30+(7*$i), 262);
 					}
 					break;
 			}
@@ -946,38 +1033,41 @@ function generar_formato_reverso($pdf, $tipo, $formato){
 			switch($formato){
 				case 1:
 					//Lineas horizontales
-					for($i = 1; $i < 28; $i++){
-						$pdf->Line(11, 36+(8*$i), 184, 36+(8*$i));
+					for($i = 1; $i < 29; $i++){
+						$pdf->Line(9, 31+(8*$i), 186, 31+(8*$i));
 					}
 					break;
 
 				case 2:
 					//Lineas horizontales
+					for($i = 1; $i < 20; $i++){
+						$pdf->Line(9, 31+(12*$i)-4, 186, 31+(12*$i)-4);
+					}
+
 					for($i = 1; $i < 19; $i++){
-						$pdf->Line(11, 36+(12*$i), 184, 36+(12*$i));
-						$pdf->Line(11, 36+(12*$i)-4, 184, 36+(12*$i)-4);
+						$pdf->Line(9, 31+(12*$i), 186, 31+(12*$i));
 					}
 					break;
 
 				case 3:
 					//Lineas horizontales
-					for($i = 1; $i < 44; $i++){
-						$pdf->Line(9, 27+(5*$i), 183, 27+(5*$i));
+					for($i = 1; $i < 46; $i++){
+						$pdf->Line(11, 31+(5*$i), 186, 31+(5*$i));
 					}
 					//Lineas verticales
-					for($i = 0; $i < 34; $i++){
-						$pdf->Line(15+(5*$i), 27, 15+(5*$i), 247);
+					for($i = 1; $i < 35; $i++){
+						$pdf->Line(11+(5*$i), 31, 11+(5*$i), 261);
 					}
 					break;
 
 				case 4:
 					//Lineas horizontales
-					for($i = 1; $i < 32; $i++){
-						$pdf->Line(9, 27+(7*$i), 183, 27+(7*$i));
+					for($i = 1; $i < 33; $i++){
+						$pdf->Line(11, 31+(7*$i), 186, 31+(7*$i));
 					}
 					//Lineas verticales
-					for($i = 0; $i < 26; $i++){
-						$pdf->Line(15+(7*$i), 27, 15+(7*$i), 247);
+					for($i = 1; $i < 25; $i++){
+						$pdf->Line(11+(7*$i), 31, 11+(7*$i), 262);
 					}
 					break;
 			}
@@ -1162,23 +1252,47 @@ function generar_margen($pdf, $tipo, $formato, $estado, $color, $grosor){
 		$pdf->SetLineWidth(intval($grosor));
 		switch ($tipo) {
 			case 1:
-				if($formato == 2 || $formato == 1){
-					//Lineas horizontales
-					$pdf->Line(22, 36, 189, 36);
-					$pdf->Line(22, 254, 189, 254);
-					//Lineas verticales
-					$pdf->Line(22, 36, 22, 254);
-					$pdf->Line(189, 36, 189, 254);
-				}else{
-					//Lineas horizontales
-					$pdf->Line(23, 27, 191, 27);
-					$pdf->Line(23, 247, 191, 247);
-					//Lineas verticales
-					$pdf->Line(23, 27, 23, 247);
-					$pdf->Line(191, 27, 191, 247);
+				switch($formato){
+					case 1:
+						//Lineas horizontales
+						$pdf->Line(30, 31, 207, 31);
+						$pdf->Line(30, 263, 207, 263);
+						//Lineas verticales
+						$pdf->Line(30, 31, 30, 263);
+						$pdf->Line(207, 31, 207, 263);
+						break;
+					
+					case 2:
+						//Lineas horizontales
+						$pdf->Line(30, 31, 207, 31);
+						$pdf->Line(30, 259, 207, 259);
+						//Lineas verticales
+						$pdf->Line(30, 31, 30, 259);
+						$pdf->Line(207, 31, 207, 259);
+						break;
+					
+					case 3:
+						//Lineas horizontales
+						$pdf->Line(30, 31, 205, 31);
+						$pdf->Line(30, 261, 205, 261);
+						//Lineas verticales
+						$pdf->Line(30, 31, 30, 261);
+						$pdf->Line(205, 31, 205, 261);
+						break;
+					
+					case 4:
+						//Lineas horizontales
+						$pdf->Line(30, 31, 205, 31);
+						$pdf->Line(30, 262, 205, 262);
+						//Lineas verticales
+						$pdf->Line(30, 31, 30, 262);
+						$pdf->Line(205, 31, 205, 262);
+						break;
+					
+					default:
+						break;
 				}
-				break;
-			
+			break;
 			case 2:
 				if($formato == 2 || $formato == 1){
 					//Lineas horizontales
@@ -1238,23 +1352,48 @@ function generar_margen_reverso($pdf, $tipo, $formato, $estado, $color, $grosor)
 		$pdf->SetLineWidth(intval($grosor));
 		switch ($tipo) {
 			case 1:
-				if($formato == 2 || $formato == 1){
-					//Lineas horizontales
-					$pdf->Line(16, 36, 184, 36);
-					$pdf->Line(16, 254, 184, 254);
-					//Lineas verticales
-					$pdf->Line(16, 36, 16, 254);
-					$pdf->Line(184, 36, 184, 254);
-				}else{
-					//Lineas horizontales
-					$pdf->Line(15, 27, 183, 27);
-					$pdf->Line(15, 247, 183, 247);
-					//Lineas verticales
-					$pdf->Line(15, 27, 15, 247);
-					$pdf->Line(183, 27, 183, 247);
+				switch($formato){
+					case 1:
+						//Lineas horizontales
+						$pdf->Line(9, 31, 186, 31);
+						$pdf->Line(9, 263, 186, 263);
+						//Lineas verticales
+						$pdf->Line(9, 31, 9, 263);
+						$pdf->Line(186, 31, 186, 263);
+						break;
+					
+					case 2:
+						//Lineas horizontales
+						$pdf->Line(9, 31, 186, 31);
+						$pdf->Line(9, 259, 186, 259);
+						//Lineas verticales
+						$pdf->Line(9, 31, 9, 259);
+						$pdf->Line(186, 31, 186, 259);
+						break;
+					
+					case 3:
+						//Lineas horizontales
+						$pdf->Line(11, 31, 186, 31);
+						$pdf->Line(11, 261, 186, 261);
+						//Lineas verticales
+						$pdf->Line(11, 31, 11, 261);
+						$pdf->Line(186, 31, 186, 261);
+						break;
+					
+					case 4:
+						//Lineas horizontales
+						$pdf->Line(11, 31, 186, 31);
+						$pdf->Line(11, 262, 186, 262);
+						//Lineas verticales
+						$pdf->Line(11, 31, 11, 262);
+						$pdf->Line(186, 31, 186, 262);
+						break;
+					
+					default:
+						break;
 				}
-				break;
-			
+			break;
+
 			case 2:
 				if($formato == 2 || $formato == 1){
 					//Lineas horizontales
@@ -1311,10 +1450,18 @@ function generar_margen_reverso($pdf, $tipo, $formato, $estado, $color, $grosor)
 // --- GENERAR LEYENDA
 function generar_leyenda($pdf, $tamanio, $formato){
 	if($_POST["leyenda"] != ""){
-		if($tamanio < 3 && $formato < 3){
-			$pdf->Text(($pdf->GetPageWidth()/2)-($pdf->GetStringWidth($_POST["leyenda"])/2), 22, $_POST["leyenda"]);
+		if($tamanio == 1){
+			if($pdf->PageNo()%2 == 0){
+				$pdf->Text((($pdf->GetPageWidth()/4)*3)-20, 25, $_POST["leyenda"]);
+			}else{
+				$pdf->Text((($pdf->GetPageWidth()/4)*3), 25, $_POST["leyenda"]);
+			}
 		}else{
-			$pdf->Text(($pdf->GetPageWidth()/2)-($pdf->GetStringWidth($_POST["leyenda"])/2), 17, $_POST["leyenda"]);
+			if($tamanio < 3 && $formato < 3){
+				$pdf->Text(($pdf->GetPageWidth()/2)-($pdf->GetStringWidth($_POST["leyenda"])/2), 22, $_POST["leyenda"]);
+			}else{
+				$pdf->Text(($pdf->GetPageWidth()/2)-($pdf->GetStringWidth($_POST["leyenda"])/2), 17, $_POST["leyenda"]);
+			}
 		}
 	}
 }
