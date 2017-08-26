@@ -1,2 +1,2 @@
 # Notebook Creator
-Sistema para crear tus propios cuadernos.
+Sistema para crear tu propio cuaderno.
