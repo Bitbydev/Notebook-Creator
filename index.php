@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="css/style.css">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<script src="js/jquery.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 	<div class="container-fluid">
@@ -53,7 +53,7 @@
 					</label>
 				</div>
 			</section>
-			
+
 			<div class="col-xs-12 bg-primary">
 				<h4 class="text-center bold">Seleccione un formato</h4>
 			</div>
@@ -134,7 +134,7 @@
 					</div>
 				</div>
 			</section>
-			
+
 			<div class="col-xs-12 bg-primary">
 				<h4 class="text-center bold">Opciones de formato</h4>
 			</div>
@@ -156,7 +156,7 @@
 					</div>
 				</div>
 			</section>
-			
+
 			<div class="col-xs-12 bg-primary">
 				<h4 class="text-center bold">Opciones de página</h4>
 			</div>
@@ -183,7 +183,7 @@
 				</div>
 			</section>
 			<div class="col-xs-12 text-center"><input type="submit" class="btn btn-primary" value="Generar Cuaderno"></div>
-		</form>	
+		</form>
 	</div>
 </body>
 </html>
