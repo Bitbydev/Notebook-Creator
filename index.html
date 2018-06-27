@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Notebook Creator</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<script src="js/jquery.js"></script>
+	<script src="js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+  <div class="container-fluid">
+    <header class="row">
+      <div class="col-12 align-items-center cover-page text-center">
+        <div class="container">
+          <h1>Notebook Creator</h1>
+          <h3>Sistema para crear tus propios cuadernos</h3>
+          <!--<button type="button" class="btn btn-info btn-lg">Ir a la aplicación</button>-->
+        </div>
+      </div>
+    </header>
+
+    <div class="row properties ">
+      <div class="container align-items-center text-center">
+        <div class="row">
+          <div class="col-12 col-md-4 item">
+            <span class="icon-template icon"></span>
+            <h2>Personaliza</h2>
+            <h6>Tu propio formato para tu cuaderno.</h6>
+          </div>
+          <div class="col-12 col-md-4 item">
+            <span class="icon-pencil icon"></span>
+            <h2>Dibuja</h2>
+            <h6>Margenes y titulos personalizados</h6>
+          </div>
+          <div class="col-12 col-md-4 item">
+            <span class="icon-number icon"></span>
+            <h2>Marca</h2>
+            <h6>Tus hojas con número de página.</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+
+		<div class="row system">
+			<div class="container align-items-center text-center">
+				<div class="row">
+					<div class="col-12">
+						<h3>Selecciona las opciones deseadas para tu cuaderno</h3>
+					</div>
+					<form action="generar_hoja.php" method="post" id="generar_hoja" target="_blank" class="row col-12">
+
+						<div class="col-12 text-center">
+							<h4>Seleccione un tamaño</h4>
+						</div>
+						<div class="col-4">
+							<input type="radio" name="tamanio" id="tam_profesional" value=1>
+							<label for="tam_profesional" class="button">
+								<div class="img-responsive">
+									<img src="images/tam_profesional.png" alt="">
+									<h5>Profesional</h5>
+								</div>
+							</label>
+						</div>
+						<div class="col-4">
+							<input type="radio" name="tamanio" id="tam_italiano" value=2>
+							<label for="tam_italiano" class="button">
+								<div class="img-responsive">
+									<img src="images/tam_italiano.png" alt="">
+									<h5>Italiano</h5>
+								</div>
+							</label>
+						</div>
+						<div class="col-4">
+							<input type="radio" name="tamanio" id="tam_frances" value=3>
+							<label for="tam_frances" class="button">
+								<div class="img-responsive">
+									<img src="images/tam_frances.png" alt="">
+									<h5>Frances</h5>
+								</div>
+							</label>
+						</div>
+
+						<div class="col-12 text-center">
+							<h4>Seleccione un formato</h4>
+						</div>
+						<div class="col-6 col-md-3">
+							<input type="radio" name="formato" id="for_raya" value=1>
+							<label for="for_raya" class="button">
+								<div class="img-responsive">
+									<img src="images/for_raya.png" alt="">
+									<h5>Raya</h5>
+								</div>
+							</label>
+						</div>
+						<div class="col-6 col-md-3">
+							<input type="radio" name="formato" id="for_dobleraya" value=2>
+							<label for="for_dobleraya" class="button">
+								<div class="img-responsive">
+									<img src="images/for_dobleraya.png" alt="">
+									<h5>Doble Raya</h5>
+								</div>
+							</label>
+						</div>
+						<div class="col-6 col-md-3">
+							<input type="radio" name="formato" id="for_cuadrochico" value=3>
+							<label for="for_cuadrochico" class="button">
+								<div class="img-responsive">
+									<img src="images/for_cuadrochico.png" alt="">
+									<h5>Cuadro Chico</h5>
+								</div>
+							</label>
+						</div>
+						<div class="col-6 col-md-3">
+							<input type="radio" name="formato" id="for_cuadrogrande" value=4>
+							<label for="for_cuadrogrande" class="button">
+								<div class="img-responsive">
+									<img src="images/for_cuadrogrande.png" alt="">
+									<h5>Cuadro Grande</h5>
+								</div>
+							</label>
+						</div>
+
+
+						<div class="col-6 col-md-3">
+							<input type="checkbox" name="margen" id="margen" value="true">
+							<label for="margen" class="check-button">
+									<h5>Activar Margen</h5>
+							</label>
+						</div>
+						<div class="col-6 col-md-3">
+							<label for="number" class="check-button">
+									<h5>Grosor <input type="number" name="grosor" id="grosor" value="2" min="0" max="30"> mm</h5>
+							</label>
+						</div>
+						<div class="col-6 col-md-3">
+							<label for="color" class="check-button">
+									<h5>Color <input type="color" name="color" id="color" value="#000000"></h5>
+							</label>
+						</div>
+						<div class="col-6 col-md-3">
+							<input type="checkbox" name="serigrafia" id="serigrafia" value="true">
+							<label for="serigrafia" class="check-button">
+									<h5>Activar Serigrafía</h5>
+							</label>
+						</div>
+
+
+						<div class="col-6 col-md-3">
+							<input type="checkbox" name="reverso" id="reverso" value="true">
+							<label for="reverso" class="check-button">
+									<h5>Generar Reverso</h5>
+							</label>
+						</div>
+						<div class="col-6 col-md-3">
+							<input type="checkbox" name="pagina" id="pagina" value="true">
+							<label for="pagina" class="check-button">
+									<h5>Mostrar # de Página</h5>
+							</label>
+						</div>
+						<div class="col-6 col-md-3">
+							<label for="number" class="check-button">
+									<h5><input type="number" name="num-paginas" id="num-paginas" value="1" min="1" max="50"> Páginas</h5>
+							</label>
+						</div>
+						<div class="col-6 col-md-3">
+							<label for="number" class="check-button">
+									<h5>Iniciar desde <input type="number" name="inicio-pag" id="inicio-pag" value="1" min="1" max="50"></h5>
+							</label>
+						</div>
+
+						<div class="col-12 text-center"><input type="submit" value="Generar cuaderno" class="submit-button"></div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+    <footer class="row">
+      <div class="container align-items-center text-center justify-content-between">
+        <div class="col-12 col-md-4 text-center item-footer">
+          <h5>Sistema creado por Israel Trejo</h5>
+        </div>
+        <div class="col-12 col-md-2 justify-content-around item-footer">
+          <a href="https://github.com/morrisondoll" target="_blank" class="icon-footer"><span class="icon-github"></span></a>
+          <a href="https://www.instagram.com/morrison_doll/" target="_blank" class="icon-footer"><span class="icon-instagram"></span></a>
+          <a href="https://twitter.com/morrisondoll" target="_blank" class="icon-footer"><span class="icon-twitter"></span></a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
