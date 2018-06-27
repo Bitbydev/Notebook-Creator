@@ -26,6 +26,7 @@ class documento{
 	private $formato;
 	private $formatoActivo;
 	private $tipoCuerpo;
+	private $colorFormato;
 	private $tipoEncabezado;
 	private $margenActivo;
 	private $grosorMargen;
@@ -37,11 +38,12 @@ class documento{
 	private $puntosNormal = array();
 	private $puntosReverso = array();
 
-	function __construct($tam, $for, $forAct, $tipoFor, $tipoEnc, $margenAct, $grosor, $col, $numPag, $cantPag, $pagIni, $rev){
+	function __construct($tam, $for, $forAct, $tipoFor, $colFor, $tipoEnc, $margenAct, $grosor, $col, $numPag, $cantPag, $pagIni, $rev){
 		$this->tamanio = $tam;
 		$this->formato = $for;
 		$this->formatoActivo = $forAct;
 		$this->tipoCuerpo = $tipoFor; //no esta en vista
+		$this->colorFormato = $colFor; //no esta en vista
 		$this->tipoEncabezado = $tipoEnc; //no esta en vista
 		$this->margenActivo = $margenAct;
 		$this->grosorMargen = $grosor;
@@ -64,7 +66,6 @@ class documento{
 		}
 
 		$this->fpdf->SetMargins(0, 0);
-		$this->fpdf->SetLineWidth(0.2);
 	}
 
 	public function verificarExistencia($valor){
@@ -133,8 +134,8 @@ class documento{
 		$this->puntosNormal["2tpb"] = new punto(201, 35);
 		$this->puntosNormal["3tpb"] = $this->puntosNormal["3tp"];
 		$this->puntosNormal["4tpb"] = $this->puntosNormal["4tp"];
-		$this->puntosNormal["1tpb"] = new punto(30, 35);
-		$this->puntosNormal["2tpb"] = new punto(30, 264);
+		$this->puntosNormal["5tpb"] = new punto(30, 35);
+		$this->puntosNormal["6tpb"] = new punto(30, 264);
 
 		//var_dump($this->puntosNormal);
 	}
@@ -189,8 +190,8 @@ class documento{
 		$this->puntosReverso["2tpb"] = new punto(196, 35);
 		$this->puntosReverso["3tpb"] = $this->puntosReverso["3tp"];
 		$this->puntosReverso["4tpb"] = $this->puntosReverso["4tp"];
-		$this->puntosReverso["1tpb"] = new punto(25, 35);
-		$this->puntosReverso["2tpb"] = new punto(25, 264);
+		$this->puntosReverso["5tpb"] = new punto(25, 35);
+		$this->puntosReverso["6tpb"] = new punto(25, 264);
 
 		//var_dump($this->puntosReverso);
 	}
@@ -200,7 +201,12 @@ class documento{
 	}
 
 	public function generarProfesionalHeaderNormal(){
-		$this->fpdf->SetDrawColor(184, 50, 39);
+		$this->fpdf->SetLineWidth(0.1);
+		if($this->colorFormato){
+			$this->fpdf->SetDrawColor(184, 50, 39);
+		}else{
+			$this->fpdf->SetDrawColor(32);
+		}
 		switch($this->tipoEncabezado){
 			case 1:
 				//Dibuja las lineas horizontales
@@ -210,13 +216,170 @@ class documento{
 				$this->fpdf->Line($this->puntosNormal["1tph1"]->obtenerX(), $this->puntosNormal["1tph1"]->obtenerY(), $this->puntosNormal["3tph1"]->obtenerX(), $this->puntosNormal["3tph1"]->obtenerY());
 				$this->fpdf->Line($this->puntosNormal["2tph1"]->obtenerX(), $this->puntosNormal["2tph1"]->obtenerY(), $this->puntosNormal["4tph1"]->obtenerX(), $this->puntosNormal["4tph1"]->obtenerY());
 				break;
+
+			case 2:
+				//Dibuja las lineas horizontales
+				$this->fpdf->Line($this->puntosNormal["1tph2"]->obtenerX(), $this->puntosNormal["1tph2"]->obtenerY(), $this->puntosNormal["2tph2"]->obtenerX(), $this->puntosNormal["2tph2"]->obtenerY());
+				$this->fpdf->Line($this->puntosNormal["3tph2"]->obtenerX(), $this->puntosNormal["3tph2"]->obtenerY(), $this->puntosNormal["4tph2"]->obtenerX(), $this->puntosNormal["4tph2"]->obtenerY());
+				//Dibuja las lineas verticales
+				$this->fpdf->Line($this->puntosNormal["1tph2"]->obtenerX(), $this->puntosNormal["1tph2"]->obtenerY(), $this->puntosNormal["3tph2"]->obtenerX(), $this->puntosNormal["3tph2"]->obtenerY());
+				$this->fpdf->Line($this->puntosNormal["2tph2"]->obtenerX(), $this->puntosNormal["2tph2"]->obtenerY(), $this->puntosNormal["4tph2"]->obtenerX(), $this->puntosNormal["4tph2"]->obtenerY());
+				//Dibuja la linea central
+				$this->fpdf->Line($this->puntosNormal["5tph2"]->obtenerX(), $this->puntosNormal["5tph2"]->obtenerY(), $this->puntosNormal["6tph2"]->obtenerX(), $this->puntosNormal["6tph2"]->obtenerY());
+				break;
+
+			case 3:
+				//Dibuja las lineas horizontales
+				$this->fpdf->Line($this->puntosNormal["1tph3"]->obtenerX(), $this->puntosNormal["1tph3"]->obtenerY(), $this->puntosNormal["2tph3"]->obtenerX(), $this->puntosNormal["2tph3"]->obtenerY());
+				$this->fpdf->Line($this->puntosNormal["3tph3"]->obtenerX(), $this->puntosNormal["3tph3"]->obtenerY(), $this->puntosNormal["4tph3"]->obtenerX(), $this->puntosNormal["4tph3"]->obtenerY());
+				$this->fpdf->Line($this->puntosNormal["5tph3"]->obtenerX(), $this->puntosNormal["5tph3"]->obtenerY(), $this->puntosNormal["6tph3"]->obtenerX(), $this->puntosNormal["6tph3"]->obtenerY());
+				$this->fpdf->Line($this->puntosNormal["7tph3"]->obtenerX(), $this->puntosNormal["7tph3"]->obtenerY(), $this->puntosNormal["8tph3"]->obtenerX(), $this->puntosNormal["8tph3"]->obtenerY());
+				//Dibuja las lineas verticales
+				$this->fpdf->Line($this->puntosNormal["1tph3"]->obtenerX(), $this->puntosNormal["1tph3"]->obtenerY(), $this->puntosNormal["3tph3"]->obtenerX(), $this->puntosNormal["3tph3"]->obtenerY());
+				$this->fpdf->Line($this->puntosNormal["2tph3"]->obtenerX(), $this->puntosNormal["2tph3"]->obtenerY(), $this->puntosNormal["4tph3"]->obtenerX(), $this->puntosNormal["4tph3"]->obtenerY());
+				$this->fpdf->Line($this->puntosNormal["5tph3"]->obtenerX(), $this->puntosNormal["5tph3"]->obtenerY(), $this->puntosNormal["7tph3"]->obtenerX(), $this->puntosNormal["7tph3"]->obtenerY());
+				$this->fpdf->Line($this->puntosNormal["6tph3"]->obtenerX(), $this->puntosNormal["6tph3"]->obtenerY(), $this->puntosNormal["8tph3"]->obtenerX(), $this->puntosNormal["8tph3"]->obtenerY());
+				break;
+
+			case 4:
+				//Dibuja las lineas horizontales
+				$this->fpdf->Line($this->puntosNormal["1tph4"]->obtenerX(), $this->puntosNormal["1tph4"]->obtenerY(), $this->puntosNormal["2tph4"]->obtenerX(), $this->puntosNormal["2tph4"]->obtenerY());
+				$this->fpdf->Line($this->puntosNormal["3tph4"]->obtenerX(), $this->puntosNormal["3tph4"]->obtenerY(), $this->puntosNormal["4tph4"]->obtenerX(), $this->puntosNormal["4tph4"]->obtenerY());
+				$this->fpdf->Line($this->puntosNormal["5tph4"]->obtenerX(), $this->puntosNormal["5tph4"]->obtenerY(), $this->puntosNormal["6tph4"]->obtenerX(), $this->puntosNormal["6tph4"]->obtenerY());
+				$this->fpdf->Line($this->puntosNormal["7tph4"]->obtenerX(), $this->puntosNormal["7tph4"]->obtenerY(), $this->puntosNormal["8tph4"]->obtenerX(), $this->puntosNormal["8tph4"]->obtenerY());
+				//Dibuja las lineas verticales
+				$this->fpdf->Line($this->puntosNormal["1tph4"]->obtenerX(), $this->puntosNormal["1tph4"]->obtenerY(), $this->puntosNormal["3tph4"]->obtenerX(), $this->puntosNormal["3tph4"]->obtenerY());
+				$this->fpdf->Line($this->puntosNormal["2tph4"]->obtenerX(), $this->puntosNormal["2tph4"]->obtenerY(), $this->puntosNormal["4tph4"]->obtenerX(), $this->puntosNormal["4tph4"]->obtenerY());
+				$this->fpdf->Line($this->puntosNormal["5tph4"]->obtenerX(), $this->puntosNormal["5tph4"]->obtenerY(), $this->puntosNormal["7tph4"]->obtenerX(), $this->puntosNormal["7tph4"]->obtenerY());
+				$this->fpdf->Line($this->puntosNormal["6tph4"]->obtenerX(), $this->puntosNormal["6tph4"]->obtenerY(), $this->puntosNormal["8tph4"]->obtenerX(), $this->puntosNormal["8tph4"]->obtenerY());
+				//Dibuja la linea central
+				$this->fpdf->Line($this->puntosNormal["9tph4"]->obtenerX(), $this->puntosNormal["9tph4"]->obtenerY(), $this->puntosNormal["10tph4"]->obtenerX(), $this->puntosNormal["10tph4"]->obtenerY());
+				$this->fpdf->Line($this->puntosNormal["11tph4"]->obtenerX(), $this->puntosNormal["11tph4"]->obtenerY(), $this->puntosNormal["12tph4"]->obtenerX(), $this->puntosNormal["12tph4"]->obtenerY());
+				break;
+		}
+	}
+
+	public function generarProfesionalHeaderReverso(){
+		$this->fpdf->SetLineWidth(0.1);
+		if($this->colorFormato){
+			$this->fpdf->SetDrawColor(184, 50, 39);
+		}else{
+			$this->fpdf->SetDrawColor(32);
+		}
+		switch($this->tipoEncabezado){
+			case 1:
+				//Dibuja las lineas horizontales
+				$this->fpdf->Line($this->puntosReverso["1tph1"]->obtenerX(), $this->puntosReverso["1tph1"]->obtenerY(), $this->puntosReverso["2tph1"]->obtenerX(), $this->puntosReverso["2tph1"]->obtenerY());
+				$this->fpdf->Line($this->puntosReverso["3tph1"]->obtenerX(), $this->puntosReverso["3tph1"]->obtenerY(), $this->puntosReverso["4tph1"]->obtenerX(), $this->puntosReverso["4tph1"]->obtenerY());
+				//Dibuja las lineas verticales
+				$this->fpdf->Line($this->puntosReverso["1tph1"]->obtenerX(), $this->puntosReverso["1tph1"]->obtenerY(), $this->puntosReverso["3tph1"]->obtenerX(), $this->puntosReverso["3tph1"]->obtenerY());
+				$this->fpdf->Line($this->puntosReverso["2tph1"]->obtenerX(), $this->puntosReverso["2tph1"]->obtenerY(), $this->puntosReverso["4tph1"]->obtenerX(), $this->puntosReverso["4tph1"]->obtenerY());
+				break;
+
+			case 2:
+				//Dibuja las lineas horizontales
+				$this->fpdf->Line($this->puntosReverso["1tph2"]->obtenerX(), $this->puntosReverso["1tph2"]->obtenerY(), $this->puntosReverso["2tph2"]->obtenerX(), $this->puntosReverso["2tph2"]->obtenerY());
+				$this->fpdf->Line($this->puntosReverso["3tph2"]->obtenerX(), $this->puntosReverso["3tph2"]->obtenerY(), $this->puntosReverso["4tph2"]->obtenerX(), $this->puntosReverso["4tph2"]->obtenerY());
+				//Dibuja las lineas verticales
+				$this->fpdf->Line($this->puntosReverso["1tph2"]->obtenerX(), $this->puntosReverso["1tph2"]->obtenerY(), $this->puntosReverso["3tph2"]->obtenerX(), $this->puntosReverso["3tph2"]->obtenerY());
+				$this->fpdf->Line($this->puntosReverso["2tph2"]->obtenerX(), $this->puntosReverso["2tph2"]->obtenerY(), $this->puntosReverso["4tph2"]->obtenerX(), $this->puntosReverso["4tph2"]->obtenerY());
+				//Dibuja la linea central
+				$this->fpdf->Line($this->puntosReverso["5tph2"]->obtenerX(), $this->puntosReverso["5tph2"]->obtenerY(), $this->puntosReverso["6tph2"]->obtenerX(), $this->puntosReverso["6tph2"]->obtenerY());
+				break;
+
+			case 3:
+				//Dibuja las lineas horizontales
+				$this->fpdf->Line($this->puntosReverso["1tph3"]->obtenerX(), $this->puntosReverso["1tph3"]->obtenerY(), $this->puntosReverso["2tph3"]->obtenerX(), $this->puntosReverso["2tph3"]->obtenerY());
+				$this->fpdf->Line($this->puntosReverso["3tph3"]->obtenerX(), $this->puntosReverso["3tph3"]->obtenerY(), $this->puntosReverso["4tph3"]->obtenerX(), $this->puntosReverso["4tph3"]->obtenerY());
+				$this->fpdf->Line($this->puntosReverso["5tph3"]->obtenerX(), $this->puntosReverso["5tph3"]->obtenerY(), $this->puntosReverso["6tph3"]->obtenerX(), $this->puntosReverso["6tph3"]->obtenerY());
+				$this->fpdf->Line($this->puntosReverso["7tph3"]->obtenerX(), $this->puntosReverso["7tph3"]->obtenerY(), $this->puntosReverso["8tph3"]->obtenerX(), $this->puntosReverso["8tph3"]->obtenerY());
+				//Dibuja las lineas verticales
+				$this->fpdf->Line($this->puntosReverso["1tph3"]->obtenerX(), $this->puntosReverso["1tph3"]->obtenerY(), $this->puntosReverso["3tph3"]->obtenerX(), $this->puntosReverso["3tph3"]->obtenerY());
+				$this->fpdf->Line($this->puntosReverso["2tph3"]->obtenerX(), $this->puntosReverso["2tph3"]->obtenerY(), $this->puntosReverso["4tph3"]->obtenerX(), $this->puntosReverso["4tph3"]->obtenerY());
+				$this->fpdf->Line($this->puntosReverso["5tph3"]->obtenerX(), $this->puntosReverso["5tph3"]->obtenerY(), $this->puntosReverso["7tph3"]->obtenerX(), $this->puntosReverso["7tph3"]->obtenerY());
+				$this->fpdf->Line($this->puntosReverso["6tph3"]->obtenerX(), $this->puntosReverso["6tph3"]->obtenerY(), $this->puntosReverso["8tph3"]->obtenerX(), $this->puntosReverso["8tph3"]->obtenerY());
+				break;
+
+			case 4:
+				//Dibuja las lineas horizontales
+				$this->fpdf->Line($this->puntosReverso["1tph4"]->obtenerX(), $this->puntosReverso["1tph4"]->obtenerY(), $this->puntosReverso["2tph4"]->obtenerX(), $this->puntosReverso["2tph4"]->obtenerY());
+				$this->fpdf->Line($this->puntosReverso["3tph4"]->obtenerX(), $this->puntosReverso["3tph4"]->obtenerY(), $this->puntosReverso["4tph4"]->obtenerX(), $this->puntosReverso["4tph4"]->obtenerY());
+				$this->fpdf->Line($this->puntosReverso["5tph4"]->obtenerX(), $this->puntosReverso["5tph4"]->obtenerY(), $this->puntosReverso["6tph4"]->obtenerX(), $this->puntosReverso["6tph4"]->obtenerY());
+				$this->fpdf->Line($this->puntosReverso["7tph4"]->obtenerX(), $this->puntosReverso["7tph4"]->obtenerY(), $this->puntosReverso["8tph4"]->obtenerX(), $this->puntosReverso["8tph4"]->obtenerY());
+				//Dibuja las lineas verticales
+				$this->fpdf->Line($this->puntosReverso["1tph4"]->obtenerX(), $this->puntosReverso["1tph4"]->obtenerY(), $this->puntosReverso["3tph4"]->obtenerX(), $this->puntosReverso["3tph4"]->obtenerY());
+				$this->fpdf->Line($this->puntosReverso["2tph4"]->obtenerX(), $this->puntosReverso["2tph4"]->obtenerY(), $this->puntosReverso["4tph4"]->obtenerX(), $this->puntosReverso["4tph4"]->obtenerY());
+				$this->fpdf->Line($this->puntosReverso["5tph4"]->obtenerX(), $this->puntosReverso["5tph4"]->obtenerY(), $this->puntosReverso["7tph4"]->obtenerX(), $this->puntosReverso["7tph4"]->obtenerY());
+				$this->fpdf->Line($this->puntosReverso["6tph4"]->obtenerX(), $this->puntosReverso["6tph4"]->obtenerY(), $this->puntosReverso["8tph4"]->obtenerX(), $this->puntosReverso["8tph4"]->obtenerY());
+				//Dibuja la linea central
+				$this->fpdf->Line($this->puntosReverso["9tph4"]->obtenerX(), $this->puntosReverso["9tph4"]->obtenerY(), $this->puntosReverso["10tph4"]->obtenerX(), $this->puntosReverso["10tph4"]->obtenerY());
+				$this->fpdf->Line($this->puntosReverso["11tph4"]->obtenerX(), $this->puntosReverso["11tph4"]->obtenerY(), $this->puntosReverso["12tph4"]->obtenerX(), $this->puntosReverso["12tph4"]->obtenerY());
+				break;
+		}
+	}
+
+	public function generarProfesionalBodyNormal(){
+		$this->fpdf->SetLineWidth(0.1);
+		if($this->colorFormato){
+			$this->fpdf->SetDrawColor(184, 50, 39);
+		}else{
+			$this->fpdf->SetDrawColor(32);
+		}
+
+		//Dibujar las lineas horizontales
+		$this->fpdf->Line($this->puntosNormal["1tpb"]->obtenerX(), $this->puntosNormal["1tpb"]->obtenerY(), $this->puntosNormal["2tpb"]->obtenerX(), $this->puntosNormal["2tpb"]->obtenerY());
+		$this->fpdf->Line($this->puntosNormal["3tpb"]->obtenerX(), $this->puntosNormal["3tpb"]->obtenerY(), $this->puntosNormal["4tpb"]->obtenerX(), $this->puntosNormal["4tpb"]->obtenerY());
+
+		//Dibujar las lineas verticales
+		$this->fpdf->Line($this->puntosNormal["1tpb"]->obtenerX(), $this->puntosNormal["1tpb"]->obtenerY(), $this->puntosNormal["3tpb"]->obtenerX(), $this->puntosNormal["3tpb"]->obtenerY());
+		$this->fpdf->Line($this->puntosNormal["2tpb"]->obtenerX(), $this->puntosNormal["2tpb"]->obtenerY(), $this->puntosNormal["4tpb"]->obtenerX(), $this->puntosNormal["4tpb"]->obtenerY());
+
+		switch($this->tipoCuerpo){
+			case 2:
+				$this->fpdf->Line($this->puntosNormal["5tpb"]->obtenerX(), $this->puntosNormal["5tpb"]->obtenerY(), $this->puntosNormal["6tpb"]->obtenerX(), $this->puntosNormal["6tpb"]->obtenerY());
+				break;
+
+			default:
+				//Nada
+				break;
+		}
+	}
+
+	public function generarProfesionalBodyReverso(){
+		$this->fpdf->SetLineWidth(0.1);
+		if($this->colorFormato){
+			$this->fpdf->SetDrawColor(184, 50, 39);
+		}else{
+			$this->fpdf->SetDrawColor(32);
+		}
+
+		//Dibujar las lineas horizontales
+		$this->fpdf->Line($this->puntosReverso["1tpb"]->obtenerX(), $this->puntosReverso["1tpb"]->obtenerY(), $this->puntosReverso["2tpb"]->obtenerX(), $this->puntosReverso["2tpb"]->obtenerY());
+		$this->fpdf->Line($this->puntosReverso["3tpb"]->obtenerX(), $this->puntosReverso["3tpb"]->obtenerY(), $this->puntosReverso["4tpb"]->obtenerX(), $this->puntosReverso["4tpb"]->obtenerY());
+
+		//Dibujar las lineas verticales
+		$this->fpdf->Line($this->puntosReverso["1tpb"]->obtenerX(), $this->puntosReverso["1tpb"]->obtenerY(), $this->puntosReverso["3tpb"]->obtenerX(), $this->puntosReverso["3tpb"]->obtenerY());
+		$this->fpdf->Line($this->puntosReverso["2tpb"]->obtenerX(), $this->puntosReverso["2tpb"]->obtenerY(), $this->puntosReverso["4tpb"]->obtenerX(), $this->puntosReverso["4tpb"]->obtenerY());
+
+		switch($this->tipoCuerpo){
+			case 2:
+				$this->fpdf->Line($this->puntosReverso["5tpb"]->obtenerX(), $this->puntosReverso["5tpb"]->obtenerY(), $this->puntosReverso["6tpb"]->obtenerX(), $this->puntosReverso["6tpb"]->obtenerY());
+				break;
+
+			default:
+				//Nada
+				break;
 		}
 	}
 
 	public function generarDocumento(){
 		$this->generarNuevaPagina();
 		$this->generarProfesionalHeaderNormal();
-		$this->fpdf->Output("D", "cuaderno.pdf");
+		$this->generarProfesionalBodyNormal();
+		$this->generarNuevaPagina();
+		$this->generarProfesionalHeaderReverso();
+		$this->generarProfesionalBodyReverso();
+		$this->fpdf->Output();
 	}
 }
 
@@ -228,8 +391,9 @@ $pdf->Output();
 
 $pTam = $_POST["tamanio"];
 $pFor = $_POST["formato"];
-$pTfo = 1;//$_POST["tipo-formato"]; no esta en vista
-$pEnc = 1;//$_POST["tipo-encabezado"]; no esta en vista
+$pTfo = 2;//$_POST["tipo-formato"]; no esta en vista
+$pCfo = true;//$_POST["color-formato"]; no esta en vista
+$pEnc = 4;//$_POST["tipo-encabezado"]; no esta en vista
 $pMar = $_POST["margen"];
 $pGro = $_POST["grosor"];
 $pCol = $_POST["color"];
@@ -239,7 +403,7 @@ $pPag = $_POST["pagina"];
 $pNum = $_POST["num-paginas"];
 $pIni = $_POST["inicio-pag"];
 
-$prueba = new documento($pTam, $pFor, $pSer, $pTfo, $pEnc, $pMar, $pGro, $pCol, $pPag, $pNum, $pIni, $pRev);
+$prueba = new documento($pTam, $pFor, $pSer, $pTfo, $pCfo, $pEnc, $pMar, $pGro, $pCol, $pPag, $pNum, $pIni, $pRev);
 $prueba->generarDocumento();
 
 ?>
