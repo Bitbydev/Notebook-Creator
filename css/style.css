@@ -209,6 +209,11 @@ input[type="checkbox"]:checked + label{
   transition: .5s all;
 }
 
+.row{
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
 @media only screen and (max-width: 768px) {
 
   .cover-page h1{

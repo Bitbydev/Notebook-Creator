@@ -21,7 +21,7 @@
       </div>
     </header>
 
-    <div class="row properties ">
+    <div class="row properties">
       <div class="container align-items-center text-center">
         <div class="row">
           <div class="col-12 col-md-4 item">
@@ -49,11 +49,15 @@
 					<div class="col-12">
 						<h3>Selecciona las opciones deseadas para tu cuaderno</h3>
 					</div>
-					<form action="generar_hoja.php" method="post" id="generar_hoja" target="_blank" class="row col-12">
+				</div>
 
+				<form action="generar_hoja.php" method="post" id="generar_hoja" target="_blank">
+					<div class="row">
 						<div class="col-12 text-center">
 							<h4>Seleccione un tamaño</h4>
 						</div>
+					</div>
+					<div class="row">
 						<div class="col-4">
 							<input type="radio" name="tamanio" id="tam_profesional" value=1>
 							<label for="tam_profesional" class="button">
@@ -81,10 +85,15 @@
 								</div>
 							</label>
 						</div>
+					</div>
 
+					<div class="row">
 						<div class="col-12 text-center">
 							<h4>Seleccione un formato</h4>
 						</div>
+					</div>
+
+					<div class="row">
 						<div class="col-6 col-md-3">
 							<input type="radio" name="formato" id="for_raya" value=1>
 							<label for="for_raya" class="button">
@@ -121,8 +130,9 @@
 								</div>
 							</label>
 						</div>
+					</div>
 
-
+					<div class="row">
 						<div class="col-6 col-md-3">
 							<input type="checkbox" name="margen" id="margen" value="true">
 							<label for="margen" class="check-button">
@@ -145,8 +155,9 @@
 									<h5>Activar Serigrafía</h5>
 							</label>
 						</div>
+					</div>
 
-
+					<div class="row">
 						<div class="col-6 col-md-3">
 							<input type="checkbox" name="reverso" id="reverso" value="true">
 							<label for="reverso" class="check-button">
@@ -169,10 +180,12 @@
 									<h5>Iniciar desde <input type="number" name="inicio-pag" id="inicio-pag" value="1" min="1" max="50"></h5>
 							</label>
 						</div>
+					</div>
 
+					<div class="row">
 						<div class="col-12 text-center"><input type="submit" value="Generar cuaderno" class="submit-button"></div>
-					</form>
-				</div>
+					</div>
+				</form>
 			</div>
 		</div>
 
