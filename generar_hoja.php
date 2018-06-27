@@ -25,7 +25,7 @@ class documento{
 	private $tamanio;
 	private $formato;
 	private $formatoActivo;
-	private $tipoFormato;
+	private $tipoCuerpo;
 	private $tipoEncabezado;
 	private $margenActivo;
 	private $grosorMargen;
@@ -34,21 +34,15 @@ class documento{
 	private $cantidadPaginas;
 	private $paginaInicial;
 	private $reversoActivo;
-	private $leyendaActivo;
-	private $valorLeyenda;
 	private $puntosNormal = array();
 	private $puntosReverso = array();
 
-	function __construct(){
-		$this->generarPuntosNormal();
-	}
-
-	function __construct2($tam, $for, $forAct, $tipoFor, $tipoEnc, $margenAct, $grosor, $col, $numPag, $cantPag, $pagIni, $rev, $leyAct, $valLey){
-		$this->tamanio = $tamanio;
-		$this->formato = $formato;
+	function __construct($tam, $for, $forAct, $tipoFor, $tipoEnc, $margenAct, $grosor, $col, $numPag, $cantPag, $pagIni, $rev){
+		$this->tamanio = $tam;
+		$this->formato = $for;
 		$this->formatoActivo = $forAct;
-		$this->tipoFormato = $tipoFor;
-		$this->tipoEncabezado = $tipoEnc;
+		$this->tipoCuerpo = $tipoFor; //no esta en vista
+		$this->tipoEncabezado = $tipoEnc; //no esta en vista
 		$this->margenActivo = $margenAct;
 		$this->grosorMargen = $grosor;
 		$this->colorMargen = $col;
@@ -56,10 +50,21 @@ class documento{
 		$this->cantidadPaginas = $cantPag;
 		$this->paginaInicial = $pagIni;
 		$this->reversoActivo = $rev;
-		$this->leyendaActivo = $leyAct;
-		$this->valorLeyenda = $valLey;
+		$this->fpdf = new FPDF('P','mm','Letter');
 
-		$this->obtenerOrientacion($tamanio);
+	//	var_dump($this);
+		$this->obtenerOrientacion($tam);
+		switch($tam){
+			case 1:
+				$this->generarProfesionalPuntosNormal();
+				if($this->verificarExistencia($rev)){
+					$this->generarProfesionalPuntosReverso();
+				}
+				break;
+		}
+
+		$this->fpdf->SetMargins(0, 0);
+		$this->fpdf->SetLineWidth(0.2);
 	}
 
 	public function verificarExistencia($valor){
@@ -189,6 +194,30 @@ class documento{
 
 		//var_dump($this->puntosReverso);
 	}
+
+	public function generarNuevaPagina(){
+		$this->fpdf->AddPage();
+	}
+
+	public function generarProfesionalHeaderNormal(){
+		$this->fpdf->SetDrawColor(184, 50, 39);
+		switch($this->tipoEncabezado){
+			case 1:
+				//Dibuja las lineas horizontales
+				$this->fpdf->Line($this->puntosNormal["1tph1"]->obtenerX(), $this->puntosNormal["1tph1"]->obtenerY(), $this->puntosNormal["2tph1"]->obtenerX(), $this->puntosNormal["2tph1"]->obtenerY());
+				$this->fpdf->Line($this->puntosNormal["3tph1"]->obtenerX(), $this->puntosNormal["3tph1"]->obtenerY(), $this->puntosNormal["4tph1"]->obtenerX(), $this->puntosNormal["4tph1"]->obtenerY());
+				//Dibuja las lineas verticales
+				$this->fpdf->Line($this->puntosNormal["1tph1"]->obtenerX(), $this->puntosNormal["1tph1"]->obtenerY(), $this->puntosNormal["3tph1"]->obtenerX(), $this->puntosNormal["3tph1"]->obtenerY());
+				$this->fpdf->Line($this->puntosNormal["2tph1"]->obtenerX(), $this->puntosNormal["2tph1"]->obtenerY(), $this->puntosNormal["4tph1"]->obtenerX(), $this->puntosNormal["4tph1"]->obtenerY());
+				break;
+		}
+	}
+
+	public function generarDocumento(){
+		$this->generarNuevaPagina();
+		$this->generarProfesionalHeaderNormal();
+		$this->fpdf->Output("D", "cuaderno.pdf");
+	}
 }
 
 // --- INICIALIZACION DEL DOCUMENTO EN PDF
@@ -197,7 +226,20 @@ generar_pagina($pdf, $_POST["tamanio"], $_POST["formato"]);
 $pdf->Output();
 */
 
-$prueba = new documento();
+$pTam = $_POST["tamanio"];
+$pFor = $_POST["formato"];
+$pTfo = 1;//$_POST["tipo-formato"]; no esta en vista
+$pEnc = 1;//$_POST["tipo-encabezado"]; no esta en vista
+$pMar = $_POST["margen"];
+$pGro = $_POST["grosor"];
+$pCol = $_POST["color"];
+$pSer = $_POST["serigrafia"];
+$pRev = $_POST["reverso"];
+$pPag = $_POST["pagina"];
+$pNum = $_POST["num-paginas"];
+$pIni = $_POST["inicio-pag"];
 
+$prueba = new documento($pTam, $pFor, $pSer, $pTfo, $pEnc, $pMar, $pGro, $pCol, $pPag, $pNum, $pIni, $pRev);
+$prueba->generarDocumento();
 
 ?>
