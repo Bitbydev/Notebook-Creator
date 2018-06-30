@@ -55,11 +55,11 @@ class documento{
 		$this->fpdf = new FPDF('P','mm','Letter');
 
 	//	var_dump($this);
-		$this->obtenerOrientacion($tam);
-		switch($tam){
+		$this->obtenerOrientacion();
+		switch($this->tamanio){
 			case 1:
 				$this->generarProfesionalPuntosNormal();
-				if($this->verificarExistencia($rev)){
+				if($this->reversoActivo){
 					$this->generarProfesionalPuntosReverso();
 				}
 				break;
@@ -68,16 +68,8 @@ class documento{
 		$this->fpdf->SetMargins(0, 0);
 	}
 
-	public function verificarExistencia($valor){
-		if(isset($valor)){
-			return true;
-		}else{
-			return false;
-		}
-	}
-
-	public function obtenerOrientacion($tamanio){
-		if($tamanio == 3){
+	public function obtenerOrientacion(){
+		if($this->tamanio == 3){
 			$this->orientacion = "L";
 		}else{
 			$this->orientacion = "P";
@@ -372,13 +364,66 @@ class documento{
 		}
 	}
 
+	public function generarProfesionalFormatoRayaNormal(){
+		//Formato Raya
+		$puntoIzq = new punto($this->puntosNormal["1tpb"]->obtenerX(), $this->puntosNormal["1tpb"]->obtenerY()+7);
+		$puntoDer = new punto($this->puntosNormal["2tpb"]->obtenerX(), $this->puntosNormal["2tpb"]->obtenerY()+7);
+
+		for($i = 0; $i < 32; $i++){
+			$this->fpdf->Line($puntoIzq->obtenerX(), $puntoIzq->obtenerY()+($i*7), $puntoDer->obtenerX(), $puntoDer->obtenerY()+($i*7));
+		}
+	}
+
+	public function generarProfesionalFormatoRayaReverso(){
+		//Formato Raya
+		$puntoIzq = new punto($this->puntosReverso["1tpb"]->obtenerX(), $this->puntosReverso["1tpb"]->obtenerY()+7);
+		$puntoDer = new punto($this->puntosReverso["2tpb"]->obtenerX(), $this->puntosReverso["2tpb"]->obtenerY()+7);
+
+		for($i = 0; $i < 32; $i++){
+			$this->fpdf->Line($puntoIzq->obtenerX(), $puntoIzq->obtenerY()+($i*7), $puntoDer->obtenerX(), $puntoDer->obtenerY()+($i*7));
+		}
+	}
+
+	public function generarProfesionalFormatoRayaNormal(){
+		//Formato Raya
+		$puntoIzq = new punto($this->puntosNormal["1tpb"]->obtenerX(), $this->puntosNormal["1tpb"]->obtenerY()+7);
+		$puntoDer = new punto($this->puntosNormal["2tpb"]->obtenerX(), $this->puntosNormal["2tpb"]->obtenerY()+7);
+
+		for($i = 0; $i < 32; $i++){
+			$this->fpdf->Line($puntoIzq->obtenerX(), $puntoIzq->obtenerY()+($i*7), $puntoDer->obtenerX(), $puntoDer->obtenerY()+($i*7));
+		}
+	}
+
+	public function generarProfesionalFormatoNormal(){
+		$this->fpdf->SetLineWidth(0.1);
+		if($this->colorFormato){
+			$this->fpdf->SetDrawColor(28, 142, 192);
+		}else{
+			$this->fpdf->SetDrawColor(32);
+		}
+		switch($this->formato){
+			case 1:
+				//Formato Raya
+				$this->generarProfesionalFormatoRayaNormal();
+				break;
+		}
+	}
+
 	public function generarDocumento(){
 		$this->generarNuevaPagina();
-		$this->generarProfesionalHeaderNormal();
-		$this->generarProfesionalBodyNormal();
-		$this->generarNuevaPagina();
-		$this->generarProfesionalHeaderReverso();
-		$this->generarProfesionalBodyReverso();
+		if($this->formatoActivo){
+			$this->generarProfesionalHeaderNormal();
+			$this->generarProfesionalBodyNormal();
+			$this->generarProfesionalFormatoNormal();
+		}
+
+		if($this->reversoActivo){
+			$this->generarNuevaPagina();
+			if($this->formatoActivo){
+				$this->generarProfesionalHeaderReverso();
+				$this->generarProfesionalBodyReverso();
+			}
+		}
 		$this->fpdf->Output();
 	}
 }
@@ -391,17 +436,44 @@ $pdf->Output();
 
 $pTam = $_POST["tamanio"];
 $pFor = $_POST["formato"];
-$pTfo = 2;//$_POST["tipo-formato"]; no esta en vista
-$pCfo = true;//$_POST["color-formato"]; no esta en vista
+$pTfo = 1;//$_POST["tipo-formato"]; no esta en vista
 $pEnc = 4;//$_POST["tipo-encabezado"]; no esta en vista
-$pMar = $_POST["margen"];
 $pGro = $_POST["grosor"];
 $pCol = $_POST["color"];
-$pSer = $_POST["serigrafia"];
-$pRev = $_POST["reverso"];
-$pPag = $_POST["pagina"];
 $pNum = $_POST["num-paginas"];
 $pIni = $_POST["inicio-pag"];
+
+//Aun no esta en vista $_POST['color-formato']
+if(isset($_POST["color-formato"])){
+	$pCfo = $_POST["color-formato"];
+}else{
+	$pCfo = NULL;
+}
+$pCfo = true;
+
+if(isset($_POST["margen"])){
+	$pMar = $_POST["margen"];
+}else{
+	$pMar = NULL;
+}
+
+if(isset($_POST["serigrafia"])){
+	$pSer = $_POST["serigrafia"];
+}else{
+	$pSer = NULL;
+}
+
+if(isset($_POST["reverso"])){
+	$pRev = $_POST["reverso"];
+}else{
+	$pRev = NULL;
+}
+
+if(isset($_POST["pagina"])){
+	$pPag = $_POST["pagina"];
+}else{
+	$pPag = NULL;
+}
 
 $prueba = new documento($pTam, $pFor, $pSer, $pTfo, $pCfo, $pEnc, $pMar, $pGro, $pCol, $pPag, $pNum, $pIni, $pRev);
 $prueba->generarDocumento();
