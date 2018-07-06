@@ -634,7 +634,7 @@ class documento{
 
 	public function generarDocumento(){
 		for($i = 0; $i < $this->cantidadPaginas; $i++){
-			$this->generarNuevaPagina($i+1);
+			$this->generarNuevaPagina($i+$this->paginaInicial);
 		}
 		$this->fpdf->Output();
 	}
