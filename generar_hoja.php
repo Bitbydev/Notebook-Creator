@@ -34,11 +34,12 @@ class documento{
 	private $numPaginasActivo;
 	private $cantidadPaginas;
 	private $paginaInicial;
+	private $posicionNumPagina;
 	private $reversoActivo;
 	private $puntosNormal = array();
 	private $puntosReverso = array();
 
-	function __construct($tam, $for, $forAct, $tipoFor, $colFor, $tipoEnc, $margenAct, $grosor, $col, $numPag, $cantPag, $pagIni, $rev){
+	function __construct($tam, $for, $forAct, $tipoFor, $colFor, $tipoEnc, $margenAct, $grosor, $col, $numPag, $cantPag, $pagIni, $posNum, $rev){
 		$this->tamanio = $tam;
 		$this->formato = $for;
 		$this->formatoActivo = $forAct;
@@ -51,10 +52,10 @@ class documento{
 		$this->numPaginasActivo = $numPag;
 		$this->cantidadPaginas = $cantPag;
 		$this->paginaInicial = $pagIni;
+		$this->posicionNumPagina = $posNum;
 		$this->reversoActivo = $rev;
 		$this->fpdf = new FPDF('P','mm','Letter');
 
-	//	var_dump($this);
 		$this->obtenerOrientacion();
 		switch($this->tamanio){
 			case 1:
@@ -188,8 +189,25 @@ class documento{
 		//var_dump($this->puntosReverso);
 	}
 
-	public function generarNuevaPagina(){
+	public function generarNuevaPagina($pagActual){
 		$this->fpdf->AddPage();
+		$this->generarNumPagina($pagActual);
+		$flagRev = $this->verificarPaginaPar($pagActual);
+		if($this->reversoActivo && $flagRev){
+			if($this->formatoActivo){
+				$this->generarProfesionalHeaderReverso();
+				$this->generarProfesionalBodyReverso();
+				$this->generarProfesionalFormatoReverso();
+			}
+			$this->generarMargenReverso();
+		}else{
+			if($this->formatoActivo){
+				$this->generarProfesionalHeaderNormal();
+				$this->generarProfesionalBodyNormal();
+				$this->generarProfesionalFormatoNormal();
+			}
+			$this->generarMargenNormal();
+		}
 	}
 
 	public function generarProfesionalHeaderNormal(){
@@ -366,31 +384,99 @@ class documento{
 
 	public function generarProfesionalFormatoRayaNormal(){
 		//Formato Raya
-		$puntoIzq = new punto($this->puntosNormal["1tpb"]->obtenerX(), $this->puntosNormal["1tpb"]->obtenerY()+7);
-		$puntoDer = new punto($this->puntosNormal["2tpb"]->obtenerX(), $this->puntosNormal["2tpb"]->obtenerY()+7);
+		$puntoIzq = new punto($this->puntosNormal["1tpb"]->obtenerX(), $this->puntosNormal["1tpb"]->obtenerY()+8);
+		$puntoDer = new punto($this->puntosNormal["2tpb"]->obtenerX(), $this->puntosNormal["2tpb"]->obtenerY()+8);
 
-		for($i = 0; $i < 32; $i++){
-			$this->fpdf->Line($puntoIzq->obtenerX(), $puntoIzq->obtenerY()+($i*7), $puntoDer->obtenerX(), $puntoDer->obtenerY()+($i*7));
+		for($i = 0; $i < 28; $i++){
+			$this->fpdf->Line($puntoIzq->obtenerX(), $puntoIzq->obtenerY()+($i*8), $puntoDer->obtenerX(), $puntoDer->obtenerY()+($i*8));
 		}
 	}
 
 	public function generarProfesionalFormatoRayaReverso(){
 		//Formato Raya
-		$puntoIzq = new punto($this->puntosReverso["1tpb"]->obtenerX(), $this->puntosReverso["1tpb"]->obtenerY()+7);
-		$puntoDer = new punto($this->puntosReverso["2tpb"]->obtenerX(), $this->puntosReverso["2tpb"]->obtenerY()+7);
+		$puntoIzq = new punto($this->puntosReverso["1tpb"]->obtenerX(), $this->puntosReverso["1tpb"]->obtenerY()+8);
+		$puntoDer = new punto($this->puntosReverso["2tpb"]->obtenerX(), $this->puntosReverso["2tpb"]->obtenerY()+8);
 
-		for($i = 0; $i < 32; $i++){
-			$this->fpdf->Line($puntoIzq->obtenerX(), $puntoIzq->obtenerY()+($i*7), $puntoDer->obtenerX(), $puntoDer->obtenerY()+($i*7));
+		for($i = 0; $i < 28; $i++){
+			$this->fpdf->Line($puntoIzq->obtenerX(), $puntoIzq->obtenerY()+($i*8), $puntoDer->obtenerX(), $puntoDer->obtenerY()+($i*8));
 		}
 	}
 
-	public function generarProfesionalFormatoRayaNormal(){
+	public function generarProfesionalFormatoDobleRayaNormal(){
 		//Formato Raya
-		$puntoIzq = new punto($this->puntosNormal["1tpb"]->obtenerX(), $this->puntosNormal["1tpb"]->obtenerY()+7);
-		$puntoDer = new punto($this->puntosNormal["2tpb"]->obtenerX(), $this->puntosNormal["2tpb"]->obtenerY()+7);
+		$puntoIzq = new punto($this->puntosNormal["1tpb"]->obtenerX(), $this->puntosNormal["1tpb"]->obtenerY()+12);
+		$puntoDer = new punto($this->puntosNormal["2tpb"]->obtenerX(), $this->puntosNormal["2tpb"]->obtenerY()+12);
 
-		for($i = 0; $i < 32; $i++){
+		for($i = 0; $i < 19; $i++){
+			$this->fpdf->Line($puntoIzq->obtenerX(), $puntoIzq->obtenerY()+(($i*12)-4), $puntoDer->obtenerX(), $puntoDer->obtenerY()+(($i*12)-4));
+			$this->fpdf->Line($puntoIzq->obtenerX(), $puntoIzq->obtenerY()+($i*12), $puntoDer->obtenerX(), $puntoDer->obtenerY()+($i*12));
+		}
+	}
+
+	public function generarProfesionalFormatoDobleRayaReverso(){
+		//Formato Raya
+		$puntoIzq = new punto($this->puntosReverso["1tpb"]->obtenerX(), $this->puntosReverso["1tpb"]->obtenerY()+12);
+		$puntoDer = new punto($this->puntosReverso["2tpb"]->obtenerX(), $this->puntosReverso["2tpb"]->obtenerY()+12);
+
+		for($i = 0; $i < 19; $i++){
+			$this->fpdf->Line($puntoIzq->obtenerX(), $puntoIzq->obtenerY()+(($i*12)-4), $puntoDer->obtenerX(), $puntoDer->obtenerY()+(($i*12)-4));
+			$this->fpdf->Line($puntoIzq->obtenerX(), $puntoIzq->obtenerY()+($i*12), $puntoDer->obtenerX(), $puntoDer->obtenerY()+($i*12));
+		}
+	}
+
+	public function generarProfesionalFormatoCuadroChicoNormal(){
+		//Formato Cuadro Chico
+		$puntoIzq = new punto($this->puntosNormal["1tpb"]->obtenerX(), $this->puntosNormal["1tpb"]->obtenerY());
+		$puntoDer = new punto($this->puntosNormal["2tpb"]->obtenerX(), $this->puntosNormal["2tpb"]->obtenerY());
+		$puntoInf = new punto($this->puntosNormal["3tpb"]->obtenerX(), $this->puntosNormal["3tpb"]->obtenerY());
+
+		for($i = 1; $i < 46; $i++){
+			$this->fpdf->Line($puntoIzq->obtenerX(), $puntoIzq->obtenerY()+($i*5), $puntoDer->obtenerX(), $puntoDer->obtenerY()+($i*5));
+			if($i < 37){
+				$this->fpdf->Line($puntoIzq->obtenerX()+($i*5), $puntoIzq->obtenerY(), $puntoInf->obtenerX()+($i*5), $puntoInf->obtenerY());
+			}
+		}
+	}
+
+	public function generarProfesionalFormatoCuadroChicoReverso(){
+		//Formato Cuadro Chico
+		$puntoIzq = new punto($this->puntosReverso["1tpb"]->obtenerX(), $this->puntosReverso["1tpb"]->obtenerY());
+		$puntoDer = new punto($this->puntosReverso["2tpb"]->obtenerX(), $this->puntosReverso["2tpb"]->obtenerY());
+		$puntoInf = new punto($this->puntosReverso["3tpb"]->obtenerX(), $this->puntosReverso["3tpb"]->obtenerY());
+
+		for($i = 1; $i < 46; $i++){
+			$this->fpdf->Line($puntoIzq->obtenerX(), $puntoIzq->obtenerY()+($i*5), $puntoDer->obtenerX(), $puntoDer->obtenerY()+($i*5));
+			if($i < 37){
+				$this->fpdf->Line($puntoIzq->obtenerX()+($i*5), $puntoIzq->obtenerY(), $puntoInf->obtenerX()+($i*5), $puntoInf->obtenerY());
+			}
+		}
+	}
+
+	public function generarProfesionalFormatoCuadroGrandeNormal(){
+		//Formato Cuadro Grande
+		$puntoIzq = new punto($this->puntosNormal["1tpb"]->obtenerX(), $this->puntosNormal["1tpb"]->obtenerY());
+		$puntoDer = new punto($this->puntosNormal["2tpb"]->obtenerX(), $this->puntosNormal["2tpb"]->obtenerY());
+		$puntoInf = new punto($this->puntosNormal["3tpb"]->obtenerX(), $this->puntosNormal["3tpb"]->obtenerY());
+
+		for($i = 1; $i < 33; $i++){
 			$this->fpdf->Line($puntoIzq->obtenerX(), $puntoIzq->obtenerY()+($i*7), $puntoDer->obtenerX(), $puntoDer->obtenerY()+($i*7));
+			if($i < 26){
+				$this->fpdf->Line($puntoIzq->obtenerX()+($i*7), $puntoIzq->obtenerY(), $puntoInf->obtenerX()+($i*7), $puntoInf->obtenerY());
+			}
+		}
+	}
+
+	public function generarProfesionalFormatoCuadroGrandeReverso(){
+		//Formato Cuadro Grande
+		$puntoIzq = new punto($this->puntosReverso["1tpb"]->obtenerX(), $this->puntosReverso["1tpb"]->obtenerY());
+		$puntoDer = new punto($this->puntosReverso["2tpb"]->obtenerX(), $this->puntosReverso["2tpb"]->obtenerY());
+		$puntoInf = new punto($this->puntosReverso["3tpb"]->obtenerX(), $this->puntosReverso["3tpb"]->obtenerY());
+
+		for($i = 1; $i < 33; $i++){
+			$this->fpdf->Line($puntoIzq->obtenerX(), $puntoIzq->obtenerY()+($i*7), $puntoDer->obtenerX(), $puntoDer->obtenerY()+($i*7));
+			if($i < 26){
+				$this->fpdf->Line($puntoIzq->obtenerX()+($i*7), $puntoIzq->obtenerY(), $puntoInf->obtenerX()+($i*7), $puntoInf->obtenerY());
+			}
 		}
 	}
 
@@ -406,23 +492,149 @@ class documento{
 				//Formato Raya
 				$this->generarProfesionalFormatoRayaNormal();
 				break;
+
+			case 2:
+				//Formato Doble Raya
+				$this->generarProfesionalFormatoDobleRayaNormal();
+				break;
+
+			case 3:
+				//Formato Cuadro Grande
+				$this->generarProfesionalFormatoCuadroChicoNormal();
+				break;
+
+			case 4:
+				//Formato Cuadro Grande
+				$this->generarProfesionalFormatoCuadroGrandeNormal();
+				break;
+		}
+	}
+
+	public function generarProfesionalFormatoReverso(){
+		$this->fpdf->SetLineWidth(0.1);
+		if($this->colorFormato){
+			$this->fpdf->SetDrawColor(28, 142, 192);
+		}else{
+			$this->fpdf->SetDrawColor(32);
+		}
+		switch($this->formato){
+			case 1:
+				//Formato Raya
+				$this->generarProfesionalFormatoRayaReverso();
+				break;
+
+			case 2:
+				//Formato Doble Raya
+				$this->generarProfesionalFormatoDobleRayaReverso();
+				break;
+
+			case 3:
+				//Formato Cuadro Grande
+				$this->generarProfesionalFormatoCuadroChicoReverso();
+				break;
+
+			case 4:
+				//Formato Cuadro Grande
+				$this->generarProfesionalFormatoCuadroGrandeReverso();
+				break;
+		}
+	}
+
+	public function verificarPaginaPar($numPagina){
+		if(($numPagina % 2) == 0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function generarNumPagina($pagActual){
+		$flagRev = $this->verificarPaginaPar($pagActual);
+		if($this->numPaginasActivo != NULL){
+			$this->fpdf->SetFont('Arial');
+			$this->fpdf->SetTextColor(0);
+			if($flagRev){
+				switch($this->posicionNumPagina){
+					case 1:
+						$this->fpdf->Text(($this->fpdf->GetPageWidth()/2), 270, (string)$pagActual);
+						break;
+
+					case 2:
+						$this->fpdf->Text(($this->fpdf->GetPageWidth()/15), 270, (string)$pagActual);
+						break;
+				}
+			}else{
+				switch($this->posicionNumPagina){
+					case 1:
+						$this->fpdf->Text(($this->fpdf->GetPageWidth()/2), 270, (string)$pagActual);
+						break;
+
+					case 2:
+						$this->fpdf->Text(($this->fpdf->GetPageWidth()/15)*13.8, 270, (string)$pagActual);
+						break;
+				}
+			}
+		}
+	}
+
+	public function convertirColHexDec(){
+		$color = str_split(str_replace("#", "", $this->colorMargen), 2);
+		for($i=0; $i < 3; $i++){
+			$color[$i] = hexdec($color[$i]);
+		}
+		//var_dump($color);
+		return $color;
+	}
+
+	public function generarMargenNormal(){
+		if($this->margenActivo != NULL){
+			$puntos = array();
+			for($i=1; $i < 5; $i++){
+				if($this->formatoActivo == NULL){
+					$punto = new Punto($this->puntosNormal[$i.'tp']->obtenerX(), $this->puntosNormal[$i.'tp']->obtenerY());
+					array_push($puntos, $punto);
+				}else{
+					$punto = new Punto($this->puntosNormal[$i.'tpb']->obtenerX(), $this->puntosNormal[$i.'tpb']->obtenerY());
+					array_push($puntos, $punto);
+				}
+			}
+
+			$color = $this->convertirColHexDec();
+			$this->fpdf->SetDrawColor($color[0], $color[1], $color[2]);
+			$this->fpdf->SetLineWidth($this->grosorMargen);
+			$this->fpdf->Line($puntos[0]->obtenerX(), $puntos[0]->obtenerY(), $puntos[1]->obtenerX(), $puntos[1]->obtenerY());
+			$this->fpdf->Line($puntos[0]->obtenerX(), $puntos[0]->obtenerY(), $puntos[2]->obtenerX(), $puntos[2]->obtenerY());
+			$this->fpdf->Line($puntos[2]->obtenerX(), $puntos[2]->obtenerY(), $puntos[3]->obtenerX(), $puntos[3]->obtenerY());
+			$this->fpdf->Line($puntos[1]->obtenerX(), $puntos[1]->obtenerY(), $puntos[3]->obtenerX(), $puntos[3]->obtenerY());
+		}
+	}
+
+	public function generarMargenReverso(){
+		if($this->margenActivo != NULL){
+			$puntos = array();
+			for($i=1; $i < 5; $i++){
+				if($this->formatoActivo == NULL){
+					$punto = new Punto($this->puntosReverso[$i.'tp']->obtenerX(), $this->puntosReverso[$i.'tp']->obtenerY());
+					array_push($puntos, $punto);
+				}else{
+					$punto = new Punto($this->puntosReverso[$i.'tpb']->obtenerX(), $this->puntosReverso[$i.'tpb']->obtenerY());
+					array_push($puntos, $punto);
+				}
+			}
+
+			$color = $this->convertirColHexDec();
+			$this->fpdf->SetDrawColor($color[0], $color[1], $color[2]);
+			$this->fpdf->SetLineWidth($this->grosorMargen);
+			$this->fpdf->Line($puntos[0]->obtenerX(), $puntos[0]->obtenerY(), $puntos[1]->obtenerX(), $puntos[1]->obtenerY());
+			$this->fpdf->Line($puntos[0]->obtenerX(), $puntos[0]->obtenerY(), $puntos[2]->obtenerX(), $puntos[2]->obtenerY());
+			$this->fpdf->Line($puntos[2]->obtenerX(), $puntos[2]->obtenerY(), $puntos[3]->obtenerX(), $puntos[3]->obtenerY());
+			$this->fpdf->Line($puntos[1]->obtenerX(), $puntos[1]->obtenerY(), $puntos[3]->obtenerX(), $puntos[3]->obtenerY());
 		}
 	}
 
 	public function generarDocumento(){
-		$this->generarNuevaPagina();
-		if($this->formatoActivo){
-			$this->generarProfesionalHeaderNormal();
-			$this->generarProfesionalBodyNormal();
-			$this->generarProfesionalFormatoNormal();
-		}
-
-		if($this->reversoActivo){
-			$this->generarNuevaPagina();
-			if($this->formatoActivo){
-				$this->generarProfesionalHeaderReverso();
-				$this->generarProfesionalBodyReverso();
-			}
+		for($i = 0; $i < $this->cantidadPaginas; $i++){
+			$this->generarNuevaPagina($i+1);
 		}
 		$this->fpdf->Output();
 	}
@@ -442,6 +654,7 @@ $pGro = $_POST["grosor"];
 $pCol = $_POST["color"];
 $pNum = $_POST["num-paginas"];
 $pIni = $_POST["inicio-pag"];
+$pPos = 1;//$_POST["posicion-num-paginas"]; no esta en vista
 
 //Aun no esta en vista $_POST['color-formato']
 if(isset($_POST["color-formato"])){
@@ -475,7 +688,7 @@ if(isset($_POST["pagina"])){
 	$pPag = NULL;
 }
 
-$prueba = new documento($pTam, $pFor, $pSer, $pTfo, $pCfo, $pEnc, $pMar, $pGro, $pCol, $pPag, $pNum, $pIni, $pRev);
+$prueba = new documento($pTam, $pFor, $pSer, $pTfo, $pCfo, $pEnc, $pMar, $pGro, $pCol, $pPag, $pNum, $pIni, $pPos, $pRev);
 $prueba->generarDocumento();
 
 ?>
