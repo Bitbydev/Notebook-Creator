@@ -649,12 +649,12 @@ $pdf->Output();
 $pTam = $_POST["tamanio"];
 $pFor = $_POST["formato"];
 $pTfo = 1;//$_POST["tipo-formato"]; no esta en vista
-$pEnc = 4;//$_POST["tipo-encabezado"]; no esta en vista
+$pEnc = $_POST["tipo-encabezado"];
 $pGro = $_POST["grosor"];
 $pCol = $_POST["color"];
 $pNum = $_POST["num-paginas"];
 $pIni = $_POST["inicio-pag"];
-$pPos = 1;//$_POST["posicion-num-paginas"]; no esta en vista
+$pPos = $_POST["posicion-num-paginas"];
 
 //Aun no esta en vista $_POST['color-formato']
 if(isset($_POST["color-formato"])){
